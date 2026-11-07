@@ -1,0 +1,31 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+
+<group name="pfsense,">
+ <rule id="100500" level="3">
+  <decoded_as>pfsense-parent</decoded_as>
+  <description>pfSense: Firewall log detected</description>
+  <options>no_log</options>
+ </rule>
+ <rule id="100501" level="5">
+  <if_sid>100500</if_sid>
+  <field name="pfsense.action">block</field>
+  <description>pfSense: Traffic blocked on interface $(pfsense.interface)</description>
+  <group>firewall_drop,</group>
+ </rule>
+ <rule id="100502" level="7">
+  <if_sid>100500</if_sid>
+  <match>,icmp,</match>
+  <description>pfSense: ICMP Ping detected</description>
+  <group>icmp,ping,network_scan,</group>
+ </rule>
+</group>

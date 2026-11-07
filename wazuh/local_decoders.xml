@@ -1,0 +1,9 @@
+  
+<decoder name="pfsense-parent">
+  <prematch type="pcre2">filterlog\[\d+\]: </prematch>
+</decoder>
+<decoder name="pfsense-filterlog-ipv4">
+  <parent>pfsense-parent</parent>
+  <regex offset="after_parent">^(\d+),,,(\d+),(\w+),(\w+),(\w+),(\w+),(\d+)</regex>
+  <order>pfsense.rulenum, pfsense.tracker, pfsense.interface, pfsense.reason, pfsense.action, pfsense.direction, pfsense.ipversion</order>
+</decoder>
